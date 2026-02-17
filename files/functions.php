@@ -6,6 +6,14 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $conn = new mysqli('localhost','root','','e-shop');
 
+function is_logged_in(){
+    if(isset($_SESSION['user'])){
+        return true;
+    }else{
+         return false;
+    }
+}
+
 function alert($type,$message){
     $_SESSION['alert']['type'] = $type;
     $_SESSION['alert']['message'] = $message;

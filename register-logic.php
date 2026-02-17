@@ -47,10 +47,13 @@ $sql = "INSERT INTO users (
 // voert de query uit en logt de gebruiker in als het lukt 
 if($conn->query($sql)){
     login_user($email,$password);
-    header('Location: account-bestellingen.php'); 
+
+    alert('success','account is succesvol aangemaakt.');
+     header('Location: account-bestellingen.php'); 
+     die();
 }else{
-    die("Kon geen account aanmaken");   
+    alert('danger','Kon geen account aanmaken.');
+    header('Location: login.php');
+    die();
 }
 
-
-die();

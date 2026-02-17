@@ -318,7 +318,13 @@
               <i class="navbar-tool-icon ci-user"></i>
             </div>
             <div class="navbar-tool-text ms-n3">
-              <small>Hallo, Inloggen</small>Mijn Account
+              
+            <?php  if (is_logged_in()){ ?>
+            <small>Hallo, <?= $_SESSION['user']['first_name'] ?> </small>
+            <?php  }else{  ?>
+            <small>Hallo, Inloggen</small>
+            <?php } ?>
+              Mijn Account
             </div>
           </a>
 
