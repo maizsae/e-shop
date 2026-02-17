@@ -5,13 +5,10 @@
 <head>
     <meta charset="utf-8">
     <title>Yesstyle | Fashion Store</title>
-    <!-- SEO Meta Tags-->
     <meta name="description" content="YesStyle is jouw online bestemming voor trendy fashion en make-up. Van streetwear tot beauty must-haves – ontdek jouw perfecte look vandaag nog.">
     <meta name="keywords" content="makeup, shop, e-commerce, korean, kleding, skincare,  business, mobile">
     <meta name="author" content="Romaisae Kadour">
-    <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -19,13 +16,11 @@
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
-    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
     <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css"/>
     <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css"/>
     <link rel="stylesheet" media="screen" href="vendor/drift-zoom/dist/drift-basic.min.css"/>
-    <!-- Main Theme Styles + Bootstrap-->
+    <!--  Theme stijl + Bootstrap-->
     <link rel="stylesheet" media="screen" href="css/theme.min.css">
-    <!-- Google Tag Manager-->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -34,13 +29,11 @@
       })(window,document,'script','dataLayer','GTM-WKV3GT5');
     </script>
   </head>
-  <!-- Body-->
   <body class="handheld-toolbar-enabled">
-    <!-- Google Tag Manager (noscript)-->
-    <noscript>
+     <noscript>
       <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
     </noscript>
-    <!-- Sign in / sign up modal-->
+    <!-- aanmeld venster-->
     <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -121,7 +114,7 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <!-- Product gallery-->
+                <!-- Product gallerij-->
                 <div class="col-lg-7 pe-lg-0">
                   <div class="product-gallery">
                     <div class="product-gallery-preview order-sm-2">
@@ -213,13 +206,12 @@
           </div>
         </div>
       </div>
-     <!-- Navbar 3 Level (Light)-->
 <header class="shadow-sm">
   <!-- Topbar-->
   <div class="topbar topbar-dark bg-dark">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <!-- Linkerkant: support-tekst -->
+      <!-- Linkerkant support tekst -->
       <div class="d-flex align-items-center">
         <div class="topbar-text text-nowrap d-none d-md-inline-block">
           <i class="ci-support"></i>
@@ -327,7 +319,7 @@
             </div>
           </a>
 
-          <!-- Cart -->
+          <!-- Winkelmand -->
           <div class="navbar-tool dropdown ms-3">
             <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html">
               <span class="navbar-tool-label">4</span>
@@ -436,7 +428,7 @@
               </div>
             </div>
           </div>
-          <!-- Einde cart -->
+          <!-- Einde winkelmand -->
         </div>
       </div>
     </div>

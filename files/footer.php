@@ -52,12 +52,12 @@
                   <input class="form-control rounded-start" type="email" name="EMAIL" placeholder="Your email" required>
                   <button class="btn btn-primary" type="submit" name="subscribe">Subscribe*</button>
                 </div>
-                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  <input class="subscription-form-antispam" type="text" name="b_c7103e2c981361a6639545bd5_29ca296126" tabindex="-1">
-                </div>
-                <div class="form-text text-light opacity-50">*Abonneer op onze nieuwsbrief om als eerste op de hoogte te blijven van kortingsaanbiedingen, updates en informatie over nieuwe producten.</div>
-                <div class="subscription-status"></div>
+                  <!-- verborgen input veld voor bots, mensen zullen dit niet invullen bots wel-->
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input class="subscription-form-antispam" type="text" name="b_c7103e2c981361a6639545bd5_29ca296126" tabindex="-1">
+                  </div>
+                  <div class="form-text text-light opacity-50">*Abonneer op onze nieuwsbrief om als eerste op de hoogte te blijven van kortingsaanbiedingen, updates en informatie over nieuwe producten.</div>
+                  <div class="subscription-status"></div>
               </form>
             </div>
             <div class="widget pb-2 mb-4">
@@ -109,7 +109,7 @@
           <hr class="hr-light mb-5">
           <div class="row pb-2">
             <div class="col-md-6 text-center text-md-start mb-4">
-              <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="img\logo.png" width="117" alt="Cartzilla"></a>
+              <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="img\logo.png" width="117" alt="Yesstyle"></a>
                 <div class="btn-group dropdown disable-autohide">
                   <button class="btn btn-outline-light border-light btn-sm dropdown-toggle px-2" type="button" data-bs-toggle="dropdown"><img class="me-2" src="img/flags/en.png" width="20" alt="English">Eng / $</button>
                   <ul class="dropdown-menu my-1">
@@ -145,20 +145,17 @@
         </div>
       </div>
     </footer>
-    <!-- Toolbar for handheld devices (Default)-->
+    
     <div class="handheld-toolbar">
       <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
     </div>
-    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
-    <!-- Vendor scrits: js libraries and plugins-->
+    <a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    
     <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/simplebar/dist/simplebar.min.js"></script>
     <script src="vendor/tiny-slider/dist/min/tiny-slider.js"></script>
     <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="vendor/drift-zoom/dist/Drift.min.js"></script>
-    <!-- Main theme script-->
+    
     <script src="js/theme.min.js"></script>
   </body>
-
-<!-- Mirrored from cartzilla.createx.studio/home-fashion-store-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Oct 2023 15:48:45 GMT -->
-</html>

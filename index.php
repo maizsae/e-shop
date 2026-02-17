@@ -311,7 +311,7 @@ require_once('files/header.php');
             <hr class="d-sm-none">
           </div>
           <!-- Product-->
-         <!-- Product (dasique - Blending Mood Cheek Berry Smoothie Edition) -->
+         
 <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
   <div class="card product-card">
     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
