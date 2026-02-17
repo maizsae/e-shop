@@ -9,6 +9,22 @@ $conn = new mysqli('localhost','root','','e-shop');
 function url($path = "/"){
     return BASE_URL . $path;
 }   
+function protected_area(){
+    if(!isset($_SESSION['user'])){
+        alert('warning','Ongeautoriseerde toegang, Log in voordat u verdergaat');
+        header('Location: login.php');
+        die();
+    }
+}
+
+function logout(){
+    if(isset($_SESSION['user'])){
+        unset($_SESSION['user']);
+    }
+    alert('succes','Uitgelogd');
+    header('Location: login.php');
+    die();
+}
 function is_logged_in(){
     if(isset($_SESSION['user'])){
         return true;
