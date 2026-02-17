@@ -42,7 +42,7 @@ $sql = "INSERT INTO users (
 // voert de query uit en logt de gebruiker in als het lukt 
 if($conn->query($sql)){
     login_user($email,$password);
-    header('Location: your_redirect_page.php'); 
+    header('Location: account-bestellingen.php'); 
 }else{
     die("Kon geen account aanmaken");   
 }
