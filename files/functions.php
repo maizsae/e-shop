@@ -3,9 +3,12 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
+define('BASE_URL', 'http://localhost/e-shop');
 $conn = new mysqli('localhost','root','','e-shop');
 
+function url($path = "/"){
+    return BASE_URL . $path;
+}   
 function is_logged_in(){
     if(isset($_SESSION['user'])){
         return true;

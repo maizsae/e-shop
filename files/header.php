@@ -280,10 +280,10 @@
     <div class="navbar navbar-expand-lg navbar-light">
       <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand d-none d-sm-block flex-shrink-0" href="index.php">
+        <a class="navbar-brand d-none d-sm-block flex-shrink-0" href="<?= url('') ?>">
           <img src="img/logo.png" width="142" alt="Yesstyle">
         </a>
-        <a class="navbar-brand d-sm-none flex-shrink-0 me-2" href="index.php">
+        <a class="navbar-brand d-sm-none flex-shrink-0 me-2" href="/">
           <img src="img/logo.png" width="74" alt="Yesstyle">
         </a>
 
@@ -313,15 +313,19 @@
             </div>
           </a>
 
+
+          <?php if (is_logged_in()){ ?>
+          <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="account-bestellingen.php">
+          <?php }else{ ?>
           <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
+          <?php } ?>
             <div class="navbar-tool-icon-box">
               <i class="navbar-tool-icon ci-user"></i>
             </div>
             <div class="navbar-tool-text ms-n3">
-              
-            <?php  if (is_logged_in()){ ?>
+            <?php if (is_logged_in()){ ?>
             <small>Hallo, <?= $_SESSION['user']['first_name'] ?> </small>
-            <?php  }else{  ?>
+            <?php }else{ ?>
             <small>Hallo, Inloggen</small>
             <?php } ?>
               Mijn Account
