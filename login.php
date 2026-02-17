@@ -7,21 +7,24 @@ require_once('files/header.php');
         <div class="row">
           <div class="col-md-6">
             <div class="card border-0 shadow">
-              <div class="card-body">
+                <div class="card-body">
+              <form action="login-logic.php" method="post">
+
+              
                 <h2 class="h4 mb-1">Login</h2>
                 <div class="py-3">
-                  <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">Met social account:</h3>
+                  <h3 class="d-inline-block align-middle fs-base fw-medium mb-2 me-2">Met sociale account:</h3>
                   <div class="d-inline-block align-middle"><a class="btn-social bs-google me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Sign in with Google"><i class="ci-google"></i></a><a class="btn-social bs-facebook me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Sign in with Facebook"><i class="ci-facebook"></i></a><a class="btn-social bs-twitter me-2 mb-2" href="#" data-bs-toggle="tooltip" title="Sign in with Twitter"><i class="ci-twitter"></i></a></div>
                 </div>
                 <hr>
                 <h3 class="fs-base pt-4 pb-2">Of gebruik het onderstaande formulier</h3>
                 <form class="needs-validation" novalidate>
                   <div class="input-group mb-3"><i class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-                    <input class="form-control rounded-start" type="email" placeholder="Email" required>
+                    <input class="form-control rounded-start" name='email'type="email" placeholder="Email" required>
                   </div>
                   <div class="input-group mb-3"><i class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
                     <div class="password-toggle w-100">
-                      <input class="form-control" type="password" placeholder="Password" required>
+                      <input name='password'class="form-control" type="password" placeholder="Password" required>
                       <label class="password-toggle-btn" aria-label="Show/hide password">
                         <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
                       </label>
@@ -36,15 +39,17 @@ require_once('files/header.php');
                   <hr class="mt-4">
                   <div class="text-end pt-4">
                     <button class="btn btn-primary" type="submit"><i class="ci-sign-in me-2 ms-n21"></i>Aanmelden</button>
-                  </div>
+                  
                 </form>
+                </div>
               </div>
+              </form>
             </div>
           </div>
           <div class="col-md-6 pt-4 mt-3 mt-md-0">
             <h2 class="h4 mb-3">Geen account? Meld je aan</h2>
             <p class="fs-sm text-muted mb-4">Registreren duurt minder dan een minuut, maar geeft je volledige controle over je bestellingen.</p>
-            <form method="post" action="login-logic.php" class="needs-validation" novalidate>
+            <form method="post" action="register-logic.php" class="needs-validation" novalidate>
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
                   <label class="form-label" for="reg-fn">Voornaam</label>
