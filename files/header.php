@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+  <?php 
+  require_once('files/functions.php');
+  ?> 
+ <!DOCTYPE html>
 <html lang="en">
   
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -605,3 +608,16 @@
 
   </div>
 </header>
+
+<?php 
+if(isset($_SESSION['alert'])){
+
+
+?>
+<div class="alert alert-<?= $_SESSION['alert']['type'] ?>">
+  <?= $_SESSION['alert']['message']  ?>
+
+</div>
+
+<?php unset($_SESSION['alert']);
+ } ?>

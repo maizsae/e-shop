@@ -10,14 +10,19 @@ $phone_number = trim($_POST['phone_number']);
 
 // controleert of wachtwoord overeenkomt
 if ($password != $password_1){
-    die("wachtwoord komt niet overeen");
+    alert('danger','Wachtwoord komt niet overeen');
+    header('Location: login.php');
+    die();
 }
 
 $sql = "SELECT * FROM users WHERE email ='{$email}'"; //controleert of er al een gebruiker bestaat met zelfde email 
 $res =$conn->query($sql);
 
 if($res->num_rows > 0){
-    die("Een gebruiker met dezelfde email bestaat al.");
+
+alert('danger','Een gebruiker met dezelfde email bestaat al.');
+    header('Location: login.php');
+    die();
 }
 $password = password_hash($password,PASSWORD_DEFAULT); // hash het wachtwoord voor veiligheid 
 $created = time();

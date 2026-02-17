@@ -5,9 +5,14 @@ $password = trim($_POST['password']);
 
 if( login_user($email,$password) ){
 
-die("succes!");
+alert('success','Login is succesvol.');
+     header('Location: account-bestellingen.php'); 
+     die();
 
 }else{
-    die("mislukt");
+        alert('danger','Je hebt de verkeerde gebruikersnaam of wachtwoord ingevoerd');
+        header('Location: login.php');
+    die();
 }
-// voert de query uit en logt de gebruiker in als het lukt 
+// voert de query uit en logt de gebruiker in als het lukt
+// redirect de gebruiker terug als het niet lukt 

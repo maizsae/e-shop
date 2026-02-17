@@ -5,6 +5,11 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 $conn = new mysqli('localhost','root','','e-shop');
+
+function alert($type,$message){
+    $_SESSION['alert']['type'] = $type;
+    $_SESSION['alert']['message'] = $message;
+}
 //functie om een  gebruiker in te loggen  
 function login_user($email,$password)
 { 
