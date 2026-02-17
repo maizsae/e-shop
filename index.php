@@ -1,67 +1,86 @@
+<?php
 
+require_once('files/header.php');
+?>
       <!-- Hero slider-->
-      <section class="tns-carousel tns-controls-lg">
-        <div class="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;responsive&quot;: {&quot;0&quot;:{&quot;nav&quot;:true, &quot;controls&quot;: false},&quot;992&quot;:{&quot;nav&quot;:false, &quot;controls&quot;: true}}}">
-          <!-- Item-->
-          <div class="px-lg-5" style="background-color: #fadada;">
-            <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="img\home\hero-slider\Jel Fit Tint.jpg" alt="Lente collectie">
-              <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
-                <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
-                  <h3 class="h2 text-light fw-light pb-1 from-start">Lente komt er aan!</h3>
-                  <h2 class="text-light display-5 from-start delay-1">Een grote Lente Collectie</h2>
-                  <p class="fs-lg text-light pb-3 from-start delay-2">Makeup, Tops, Shorts, skincare &amp; meer!</p>
-                  <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Winkel nu<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item-->
-          <div class="px-lg-5" style="background-color: #d8c2c1;">
-            <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="img\home\hero-slider\download (7).jpg" alt="Makeup">
-              <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
-                <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
-                  <h3 class="h2 text-light fw-light pb-1 from-bottom">Wees er snel bij! Aanbieding geldig voor beperde tijd.</h3>
-                  <h2 class="text-light display-5 from-bottom delay-1">Makeup aanbieding</h2>
-                  <p class="fs-lg text-light pb-3 from-bottom delay-2">Gloss, Eyeshadow, Foundations, Mascara &amp; meer...</p>
-                  <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Winkel nu<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item-->
-          <div class="px-lg-5" style="background-color: #c0a4b4;">
-            <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="img\home\hero-slider\hanni.jpg" alt="Kleding">
-              <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
-                <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
-                  <h3 class="h2 text-light fw-light pb-1 from-top">Maak je look compleet</h3>
-                  <h2 class="text-light display-5 from-top delay-1">met de nieuwe lentekledingcollectie</h2>
-                  <p class="fs-lg text-light pb-3 from-top delay-2">accesoires &amp; tops, rokken, tassen &amp; meer...</p>
-                  <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Winkel nu<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                </div>
-              </div>
+      <!-- Hero slider-->
+<section class="tns-carousel tns-controls-lg">
+  <div class="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;responsive&quot;: {&quot;0&quot;:{&quot;nav&quot;:true, &quot;controls&quot;: false},&quot;992&quot;:{&quot;nav&quot;:false, &quot;controls&quot;: true}}}">
+    <!-- Item 1 -->
+    <div class="px-lg-5" style="background-color: #fadada;">
+      <div class="d-lg-flex justify-content-center align-items-center ps-lg-4">
+        <img class="d-block order-lg-2 flex-shrink-0"
+             src="img/home/hero-slider/Jel Fit Tint.jpg"
+             alt="Lente collectie">
+        <div class="position-relative mx-auto py-5 px-4 order-lg-1"
+             style="max-width: 42rem; z-index: 10;">
+          <div class="text-center">
+            <h3 class="h2 text-light fw-light pb-1">Lente komt er aan!</h3>
+            <h2 class="text-light display-5">Een grote Lente Collectie</h2>
+            <p class="fs-lg text-light pb-3">Makeup, Tops, Shorts, skincare &amp; meer!</p>
+            <div class="d-table mx-auto">
+              <a class="btn btn-primary" href="shop-grid-ls.html">
+                Winkel nu<i class="ci-arrow-right ms-2 me-n1"></i>
+              </a>
             </div>
           </div>
         </div>
-      </section>
-      <!-- Popular categories-->
-      <section class="container position-relative pt-3 pt-lg-0 pb-5 mt-lg-n10" style="z-index: 10;">
-        <div class="row">
-          <div class="col-xl-8 col-lg-9">
-            <div class="card border-0 shadow-lg">
-              <div class="card-body px-3 pt-grid-gutter pb-0">
-                <div class="row g-0 ps-1">
-                  <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="shop-grid-ls.html"><img class="d-block rounded mb-3" src="img\home\categories\Men.jpg" alt="Men">
-                      <h3 class="fs-base pt-1 mb-0">Mannen</h3></a></div>
-                  <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="shop-grid-ls.html"><img class="d-block rounded mb-3" src="img/home/categories/Women.jpg" alt="Women">
-                      <h3 class="fs-base pt-1 mb-0">Vrouwen</h3></a></div>
-                  <div class="col-sm-4 px-2 mb-grid-gutter"><a class="d-block text-center text-decoration-none me-1" href="shop-grid-ls.html"><img class="d-block rounded mb-3" src="img/home/categories/Kids.jpg" alt="Kids">
-                      <h3 class="fs-base pt-1 mb-0">Kinderen</h3></a></div>
-                </div>
-              </div>  
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="px-lg-5" style="background-color: #d8c2c1;">
+      <div class="d-lg-flex justify-content-center align-items-center ps-lg-4">
+        <img class="d-block order-lg-2 flex-shrink-0"
+             src="img/home/hero-slider/download (7).jpg"
+             alt="Makeup">
+        <div class="position-relative mx-auto py-5 px-4 order-lg-1"
+             style="max-width: 42rem; z-index: 10;">
+          <div class="text-center">
+            <h3 class="h2 text-light fw-light pb-1">
+              Wees er snel bij! Aanbieding geldig voor beperkte tijd.
+            </h3>
+            <h2 class="text-light display-5">Makeup aanbieding</h2>
+            <p class="fs-lg text-light pb-3">
+              Gloss, Eyeshadow, Foundations, Mascara &amp; meer...
+            </p>
+            <div class="d-table mx-auto">
+              <a class="btn btn-primary" href="shop-grid-ls.html">
+                Winkel nu<i class="ci-arrow-right ms-2 me-n1"></i>
+              </a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="px-lg-5" style="background-color: #c0a4b4;">
+      <div class="d-lg-flex justify-content-center align-items-center ps-lg-4">
+        <img class="d-block order-lg-2 flex-shrink-0"
+             src="img/home/hero-slider/hanni.jpg"
+             alt="Kleding">
+        <div class="position-relative mx-auto py-5 px-4 order-lg-1"
+             style="max-width: 42rem; z-index: 10;">
+          <div class="text-center">
+            <h3 class="h2 text-light fw-light pb-1">Maak je look compleet</h3>
+            <h2 class="text-light display-5">met de nieuwe lentekledingcollectie</h2>
+            <p class="fs-lg text-light pb-3">
+              accessoires &amp; tops, rokken, tassen &amp; meer...
+            </p>
+            <div class="d-table mx-auto">
+              <a class="btn btn-primary" href="shop-grid-ls.html">
+                Winkel nu<i class="ci-arrow-right ms-2 me-n1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+      
       <!-- (Trending producten)-->
       <section class="container pt-md-3 pb-5 mb-md-3">
         <h2 class="h3 text-center">Trending producten</h2>
@@ -292,25 +311,51 @@
             <hr class="d-sm-none">
           </div>
           <!-- Product-->
-          <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-            <div class="card product-card">
-              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img src="img/shop/catalog/product6.jpg" alt="Product"></a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">makeup</a>
-                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">dasique - Blending Mood Cheek Berry Smoothie Edition
-</a></h3>
-                <div class="d-flex justify-content-between">
-                  <div class="product-price"><span class="text-accent">€14,<small>40</small></span></div>
-                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-half active"></i>
-                  </div>
-                </div>
-              </div>
-             
-                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i class="ci-cart fs-sm me-1"></i>Voeg toe</button>
-                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-              </div>
-            </div>
-            <hr class="d-sm-none">
-          </div>
+         <!-- Product (dasique - Blending Mood Cheek Berry Smoothie Edition) -->
+<div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+  <div class="card product-card">
+    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
+      <i class="ci-heart"></i>
+    </button>
+    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
+      <img src="img/shop/catalog/product6.jpg" alt="Product">
+    </a>
+
+    <div class="card-body py-2">
+      <a class="product-meta d-block fs-xs pb-1" href="#">makeup</a>
+      <h3 class="product-title fs-sm">
+        <a href="shop-single-v1.html">
+          dasique - Blending Mood Cheek Berry Smoothie Edition
+        </a>
+      </h3>
+      <div class="d-flex justify-content-between">
+        <div class="product-price">
+          <span class="text-accent">€14,<small>40</small></span>
+        </div>
+        <div class="star-rating">
+          <i class="star-rating-icon ci-star-filled active"></i>
+          <i class="star-rating-icon ci-star-filled active"></i>
+          <i class="star-rating-icon ci-star-filled active"></i>
+          <i class="star-rating-icon ci-star-filled active"></i>
+          <i class="star-rating-icon ci-star-half active"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verborgen body (hover) moet in een eigen div zitten -->
+    <div class="card-body card-body-hidden">
+      <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
+        <i class="ci-cart fs-sm me-1"></i>Voeg toe
+      </button>
+      <div class="text-center">
+        <a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal">
+          <i class="ci-eye align-middle me-1"></i>Quick view
+        </a>
+      </div>
+    </div>
+  </div>
+  <hr class="d-sm-none">
+</div>
           <!-- Product-->
           <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div class="card product-card">
@@ -400,7 +445,7 @@
                   <button type="button"><i class="ci-arrow-left"></i></button>
                   <button type="button"><i class="ci-arrow-right"></i></button>
                 </div>
-              </div><a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100" src="img\shop\catalog\[Official Shop] Korean Glass Skin Set (Daily Skincare Routine For Clear Skin) Cleanser + Foam + Toner + Serum + Moisturizer.jpg" alt="For Women"></a>
+              </div><a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100"></a>
             </div>
           </div>
           <!-- Product grid (carousel)-->
@@ -587,3 +632,7 @@
               </div></a></div>
         </div>
       </section>
+      <?php
+
+require_once('files/footer.php');
+?>
