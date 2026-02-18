@@ -5,6 +5,44 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 define('BASE_URL', 'http://localhost/e-shop');
 $conn = new mysqli('localhost','root','','e-shop');
+function db_insert($table_name, $data){
+    global $conn; // gebruik de globale connectie
+
+    // alleen dit aangepast:
+    $column_names = "(";
+    $column_values = "(";
+
+    $sql =  "INSERT INTO $table_name";
+
+    $is_first = true;
+    foreach ($data as $key => $value) {
+        if($is_first){
+            $is_first = false;
+        } else {
+            $column_names .= ",";
+            $column_values .= ",";
+        }
+        $column_names .= $key;
+        $gettype = gettype($value);
+        if($gettype == 'string'){
+            $column_values .= "'$value'";
+        }else{
+            $column_values .= $value;
+        }
+    }
+    $column_names .= ")";
+    $column_values .= ")";
+    $sql .= $column_names." VALUES ".$column_values;
+
+    if($conn->query($sql)){
+        return true;
+    }else{
+        return false;
+    }
+
+    echo $sql;
+    die();
+}
 
 function upload_images($files)
 {
@@ -104,6 +142,7 @@ function login_user($email,$password)
      return true;
 }
 
+
 function text_input($data)
 {
     $name = isset($data['name']) ? $data['name'] : "";
@@ -128,5 +167,47 @@ function text_input($data)
             <input name="'.$name.'" value="'. $value .'" class="form-control" type="text" id="'.$name.'" placeholder="'.$name.'" '.$attributes.'>
             ' . $error_text;
 }
+
+
+
+function select_input($data, $options)
+{
+    $name = isset($data['name']) ? $data['name'] : "";
+    $attributes = isset($data['attributes']) ? $data['attributes'] : "";
+
+    // waarde
+    $selected_value = "";
+    if(isset($_SESSION['form']['value'][$name])){
+        $selected_value = $_SESSION['form']['value'][$name];
+    }
+    if(isset($data['value'])){
+        $selected_value = $data['value'];
+    }
+
+    // foutmelding
+    $error_text = "";
+    if(isset($_SESSION['form']['error'][$name])){
+        $error_text = '<div class="form-text text-danger">' . $_SESSION['form']['error'][$name] . '</div>';
+    }
+
+    $label = isset($data['label']) ? $data['label'] : ucfirst($name);
+
+    // opties genereren
+    $options_html = "";
+    foreach ($options as $key => $option_text) {
+        $selected = ($key == $selected_value) ? "selected" : "";
+        $options_html .= '<option value="'.htmlspecialchars($key).'" '.$selected.'>'.htmlspecialchars($option_text).'</option>';
+    }
+
+    // select tag
+    $select_tag = '<label class="form-label text-capitalize" for="'. $name .'">'. $label .'</label>
+    <select name="'.$name.'" class="form-control" id="'.$name.'" '.$attributes.'>
+        '.$options_html.'
+    </select>
+    '.$error_text;
+
+    return $select_tag;
+}
+
 
 

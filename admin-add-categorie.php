@@ -6,11 +6,21 @@ protected_area();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $_SESSION['form']['value'] = $_POST; 
 
-$imgs = upload_images ($_FILES);
-echo "<pre>";
-print_r($imgs);
-die();
 
+$imgs = upload_images ($_FILES);
+$imgs = [];
+$data['name'] = $_POST['name'];
+$data['photo'] = json_encode($imgs);
+$data['parent_id'] = 0;
+
+if(db_insert('categories',$data)){
+  alert('success','Categorie is succesvol aangemaakt');
+header('Location: admin-add-categorie.php');
+unset($_SESSION['form']);
+}else{
+  alert('danger','Gefaald om een categorie toe te voegen, probeer het nog een keer');
+header('Location: admin-add-categorie.php');
+}
 die();
 }
 require_once('files/header.php');
@@ -59,17 +69,34 @@ require_once('files/header.php');
                     <?= text_input([
                       'name'=> 'name',
                       
-                      'label'=> 'Categorie naam',
+                      
                     ]) ?>
                     <div class="row mt-4">
-                      <div class="col-12">
+                      <div class="col-md-6">
                         <div class="form-group">
-                          <label for="photo">categorie foto </label>
-                          <input class="form-control"name="photo" type="file" accept=".jpg,.jpeg,.png">
+                         <?= select_input([
+                      'name'=> 'parent id',
+                      'name'=> 'parent categorie',
+                         ], [
+                          1 => 'Een',
+                          2 => 'Twee',
+                          3 => 'Drie',
+                         
+                      
+                      
+                    ]) ?>
 
                         </div>
 
                       </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="photo">categorie foto </label>
+                            <input class="form-control"name="photo" type="file" accept=".jpg,.jpeg,.png">
+
+                          </div>
+
+                        </div>
 
 
                     </div>
@@ -82,6 +109,9 @@ require_once('files/header.php');
             </section>
         </div>
       </div>
+    
+
       <?php
+      
       require_once('files/footer.php');
 ?>
