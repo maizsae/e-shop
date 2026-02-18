@@ -1,13 +1,14 @@
 <?php
   require_once('files/functions.php');
+
 protected_area();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $_SESSION['form']['value'] = $_POST; 
-$_SESSION['form']['error'] = []; 
-$_SESSION['form']['error']['name'] = 'Naam is te lang'; 
+echo "<pre>";
+print_r($_FILES);
+die();
 
-header('Location: admin-add-categorie.php');
 die();
 }
 require_once('files/header.php');
@@ -50,7 +51,7 @@ require_once('files/header.php');
                     </select>
                   </div>
                 </div>
-                <form action="admin-add-categorie.php" method="POST">
+                <form action="admin-add-categorie.php" method="POST" enctype="multipart/form-data">
                   <div class="mb-3 pb-2">
                    
                     <?= text_input([
@@ -58,7 +59,18 @@ require_once('files/header.php');
                       
                       'label'=> 'Categorie naam',
                     ]) ?>
-                    
+                    <div class="row mt-4">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="photo">categorie foto </label>
+                          <input class="form-control"name="photo" type="file" accept=".jpg,.jpeg,.png">
+
+                        </div>
+
+                      </div>
+
+
+                    </div>
                   </div>
                   
                   
