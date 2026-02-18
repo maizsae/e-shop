@@ -26,7 +26,7 @@ require_once('files/header.php');
           <!-- Content  -->
           <section class="col-lg-8">
             <!-- Toolbar-->
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
               <div class="d-flex align-items-center">
                 <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
                 <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
@@ -37,7 +37,7 @@ require_once('files/header.php');
                   <option>Vertraagd</option>
                   <option>Geanuleerd</option>
                 </select>
-              </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="logout.php"><i class="ci-sign-out me-2"></i>uitloggen</a>
+              </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i class="ci-sign-out me-2"></i>uitloggen</a>
             </div>
              main content here
             

@@ -58,3 +58,29 @@ function login_user($email,$password)
      return true;
 }
 
+function text_input($data)
+{
+    $name = isset($data['name']) ? $data['name'] : "";
+    $attributes = isset($data['attributes']) ? $data['attributes'] : "";
+
+    // waarde
+    $value = "";
+    if(isset($_SESSION['form']['value'][$name])){
+        $value = $_SESSION['form']['value'][$name];
+    }
+
+    // foutmelding
+    $error_text = "";
+    if(isset($_SESSION['form']['error'][$name])){
+        $error_text = '<div class="form-text text-danger">' . $_SESSION['form']['error'][$name] . '</div>';
+    }
+
+    $label = isset($data['label']) ? $data['label'] : ucfirst($name);
+    if(isset($data['value'])) $value = $data['value'];
+
+    return '<label class="form-label text-capitalize" for="'. $name .'">'. $label .'</label>
+            <input name="'.$name.'" value="'. $value .'" class="form-control" type="text" id="'.$name.'" placeholder="'.$name.'" '.$attributes.'>
+            ' . $error_text;
+}
+
+
