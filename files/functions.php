@@ -6,6 +6,52 @@ if (session_status() == PHP_SESSION_NONE) {
 define('BASE_URL', 'http://localhost/e-shop');
 $conn = new mysqli('localhost','root','','e-shop');
 
+function upload_images($files)
+{
+    ini_set('memory_limit', '512M');
+    if ($files == null || empty($files)) {
+        return [];
+    }
+
+    $uploaded_images = array(); 
+    foreach ($files as $file) {
+    print_r($file);
+
+    if (
+                isset($file['name']) &&
+                isset($file['type']) &&
+                isset($file['tmp_name']) &&
+                isset($file['error']) &&
+                isset($file['size'])
+            ) {
+
+
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+                $file_name = time() . "-" .rand(100000,1000000). "." . $ext;
+                $destination = 'uploads/' . $file_name;
+                $res = move_uploaded_file($file['tmp_name'], $destination);
+                if(!$res){
+                    
+                    continue;
+
+                }
+
+                $img['src'] = $destination; 
+                $uploaded_images[] = $img;
+
+        
+
+
+            
+            }
+    }
+
+    
+
+    return $uploaded_images;
+}
+
+
 function url($path = "/"){
     return BASE_URL . $path;
 }   

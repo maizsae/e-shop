@@ -5,8 +5,10 @@ protected_area();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $_SESSION['form']['value'] = $_POST; 
+
+$imgs = upload_images ($_FILES);
 echo "<pre>";
-print_r($_FILES);
+print_r($imgs);
 die();
 
 die();
