@@ -14,14 +14,10 @@ if ($conn->connect_errno) {
     die("Fout bij verbinden met database: " . $conn->connect_error);
 }
 
-// --- FUNCTIES ---
 
 
-/*
-|--------------------------------------------------------------------------
-| DB INSERT (ongewijzigd)
-|--------------------------------------------------------------------------
-*/
+
+
 function db_insert($table_name, $data)
 {
     global $conn;
@@ -63,11 +59,7 @@ function db_insert($table_name, $data)
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| DB SELECT (toegevoegd)
-|--------------------------------------------------------------------------
-*/
+
 function db_select($table_name, $where = null)
 {
     global $conn;
@@ -94,11 +86,7 @@ function db_select($table_name, $where = null)
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| IMAGE UPLOAD (ongewijzigd)
-|--------------------------------------------------------------------------
-*/
+
 function upload_images($files)
 {
     ini_set('memory_limit', '512M');
@@ -142,22 +130,13 @@ function upload_images($files)
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| URL
-|--------------------------------------------------------------------------
-*/
 function url($path = "/")
 {
     return BASE_URL . $path;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| PROTECTED AREA
-|--------------------------------------------------------------------------
-*/
+
 function protected_area()
 {
     if (!isset($_SESSION['user'])) {
@@ -171,11 +150,7 @@ function protected_area()
 }
 
 
-/*
-||--------------------------------------------------------------------------
-|| ADMIN PROTECTED AREA
-||--------------------------------------------------------------------------
-*/
+
 function admin_protected_area()
 {
     if (!isset($_SESSION['user'])) {
@@ -193,11 +168,7 @@ function admin_protected_area()
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| LOGOUT
-|--------------------------------------------------------------------------
-*/
+
 function logout()
 {
     if (isset($_SESSION['user'])) {
@@ -212,22 +183,14 @@ function logout()
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| CHECK LOGIN
-|--------------------------------------------------------------------------
-*/
+
 function is_logged_in()
 {
     return isset($_SESSION['user']);
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| ALERT
-|--------------------------------------------------------------------------
-*/
+
 function alert($type, $message)
 {
     $_SESSION['alert']['type'] = $type;
@@ -235,11 +198,7 @@ function alert($type, $message)
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| LOGIN USER
-|--------------------------------------------------------------------------
-*/
+
 function login_user($email, $password)
 {
     global $conn;
@@ -264,11 +223,7 @@ function login_user($email, $password)
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| TEXT INPUT
-|--------------------------------------------------------------------------
-*/
+
 function text_input($data)
 {
     $name = $data['name'] ?? "";
@@ -282,16 +237,12 @@ function text_input($data)
     $label = $data['label'] ?? ucfirst($name);
 
     return '<label class="form-label text-capitalize" for="' . $name . '">' . $label . '</label>
-            <input name="' . $name . '" value="' . $value . '" class="form-control" type="text" id="' . $name . '" placeholder="' . $name . '" ' . $attributes . '>
+            <input name="' . $name . '" value="' . $value . '" class="form-control" type="text" id="' . $name . '" placeholder="' . $label . '" ' . $attributes . '>
             ' . $error_text;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| SELECT INPUT
-|--------------------------------------------------------------------------
-*/
+
 function select_input($data, $options)
 {
     $name = $data['name'] ?? "";
@@ -316,12 +267,12 @@ function select_input($data, $options)
     }
 
     return '<label class="form-label text-capitalize" for="' . $name . '">' . $label . '</label>
-    <select name="' . $name . '" class="form-control" id="' . $name . '" ' . $attributes . '>
+    <select name="' . $name . '" class="form-select" id="' . $name . '" ' . $attributes . '>
         ' . $options_html . '
     </select>
     ' . $error_text;
 }
 
 
-// --- RETURN DATABASECONNECTIE --- //
+
 return $conn;
