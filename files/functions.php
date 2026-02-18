@@ -3,20 +3,31 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 define('BASE_URL', 'http://localhost/e-shop');
-$conn = new mysqli('localhost','root','','e-shop');
-function db_insert($table_name, $data){
+
+// Maak databaseverbinding
+$conn = new mysqli('localhost', 'root', '', 'e-shop');
+
+// Controleer connectie
+if ($conn->connect_errno) {
+    die("Fout bij verbinden met database: " . $conn->connect_error);
+}
+
+// --- FUNCTIES ---
+
+function db_insert($table_name, $data)
+{
     global $conn; // gebruik de globale connectie
 
-    // alleen dit aangepast:
     $column_names = "(";
     $column_values = "(";
 
-    $sql =  "INSERT INTO $table_name";
+    $sql = "INSERT INTO $table_name";
 
     $is_first = true;
     foreach ($data as $key => $value) {
-        if($is_first){
+        if ($is_first) {
             $is_first = false;
         } else {
             $column_names .= ",";
@@ -24,24 +35,21 @@ function db_insert($table_name, $data){
         }
         $column_names .= $key;
         $gettype = gettype($value);
-        if($gettype == 'string'){
+        if ($gettype == 'string') {
             $column_values .= "'$value'";
-        }else{
+        } else {
             $column_values .= $value;
         }
     }
     $column_names .= ")";
     $column_values .= ")";
-    $sql .= $column_names." VALUES ".$column_values;
+    $sql .= $column_names . " VALUES " . $column_values;
 
-    if($conn->query($sql)){
+    if ($conn->query($sql)) {
         return true;
-    }else{
+    } else {
         return false;
     }
-
-    echo $sql;
-    die();
 }
 
 function upload_images($files)
@@ -51,163 +59,125 @@ function upload_images($files)
         return [];
     }
 
-    $uploaded_images = array(); 
+    $uploaded_images = [];
     foreach ($files as $file) {
-    print_r($file);
-
-    if (
-                isset($file['name']) &&
-                isset($file['type']) &&
-                isset($file['tmp_name']) &&
-                isset($file['error']) &&
-                isset($file['size'])
-            ) {
-
-
+        if (
+            isset($file['name']) &&
+            isset($file['type']) &&
+            isset($file['tmp_name']) &&
+            isset($file['error']) &&
+            isset($file['size'])
+        ) {
             $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-                $file_name = time() . "-" .rand(100000,1000000). "." . $ext;
-                $destination = 'uploads/' . $file_name;
-                $res = move_uploaded_file($file['tmp_name'], $destination);
-                if(!$res){
-                    
-                    continue;
+            $file_name = time() . "-" . rand(100000, 1000000) . "." . $ext;
+            $destination = 'uploads/' . $file_name;
+            $res = move_uploaded_file($file['tmp_name'], $destination);
+            if (!$res) continue;
 
-                }
-
-                $img['src'] = $destination; 
-                $uploaded_images[] = $img;
-
-        
-
-
-            
-            }
+            $img['src'] = $destination;
+            $uploaded_images[] = $img;
+        }
     }
-
-    
 
     return $uploaded_images;
 }
 
-
-function url($path = "/"){
+function url($path = "/")
+{
     return BASE_URL . $path;
-}   
-function protected_area(){
-    if(!isset($_SESSION['user'])){
-        alert('warning','Ongeautoriseerde toegang, Log in voordat u verdergaat');
+}
+
+function protected_area()
+{
+    if (!isset($_SESSION['user'])) {
+        alert('warning', 'Ongeautoriseerde toegang, Log in voordat u verdergaat');
         header('Location: login.php');
         die();
     }
 }
 
-function logout(){
-    if(isset($_SESSION['user'])){
+function logout()
+{
+    if (isset($_SESSION['user'])) {
         unset($_SESSION['user']);
     }
-    alert('succes','Uitgelogd');
+    alert('succes', 'Uitgelogd');
     header('Location: login.php');
     die();
 }
-function is_logged_in(){
-    if(isset($_SESSION['user'])){
-        return true;
-    }else{
-         return false;
-    }
+
+function is_logged_in()
+{
+    return isset($_SESSION['user']);
 }
 
-function alert($type,$message){
+function alert($type, $message)
+{
     $_SESSION['alert']['type'] = $type;
     $_SESSION['alert']['message'] = $message;
 }
-//functie om een  gebruiker in te loggen  
-function login_user($email,$password)
-{ 
+
+function login_user($email, $password)
+{
     global $conn;
 
-    $sql = "SELECT * FROM users WHERE email ='{$email}'"; // haalt gebruiker op
-    $res = $conn->query($sql); 
+    $sql = "SELECT * FROM users WHERE email ='{$email}'";
+    $res = $conn->query($sql);
 
-    if($res->num_rows < 1){
+    if ($res->num_rows < 1) {
         return false;
     }
 
-    $row = $res->fetch_assoc();     
+    $row = $res->fetch_assoc();
 
-    if(!password_verify($password, $row['password'])) { // controleert of wachtwoord overeenkomt met gehaste wachtwoord
+    if (!password_verify($password, $row['password'])) {
         return false;
     }
-    $_SESSION['user'] = $row; // sla gebruiker op in een sessie
-     return true;
+    $_SESSION['user'] = $row;
+    return true;
 }
-
 
 function text_input($data)
 {
-    $name = isset($data['name']) ? $data['name'] : "";
-    $attributes = isset($data['attributes']) ? $data['attributes'] : "";
+    $name = $data['name'] ?? "";
+    $attributes = $data['attributes'] ?? "";
 
-    // waarde
-    $value = "";
-    if(isset($_SESSION['form']['value'][$name])){
-        $value = $_SESSION['form']['value'][$name];
-    }
+    $value = $_SESSION['form']['value'][$name] ?? $data['value'] ?? "";
 
-    // foutmelding
-    $error_text = "";
-    if(isset($_SESSION['form']['error'][$name])){
-        $error_text = '<div class="form-text text-danger">' . $_SESSION['form']['error'][$name] . '</div>';
-    }
+    $error_text = isset($_SESSION['form']['error'][$name]) ?
+        '<div class="form-text text-danger">' . $_SESSION['form']['error'][$name] . '</div>' : "";
 
-    $label = isset($data['label']) ? $data['label'] : ucfirst($name);
-    if(isset($data['value'])) $value = $data['value'];
+    $label = $data['label'] ?? ucfirst($name);
 
-    return '<label class="form-label text-capitalize" for="'. $name .'">'. $label .'</label>
-            <input name="'.$name.'" value="'. $value .'" class="form-control" type="text" id="'.$name.'" placeholder="'.$name.'" '.$attributes.'>
+    return '<label class="form-label text-capitalize" for="' . $name . '">' . $label . '</label>
+            <input name="' . $name . '" value="' . $value . '" class="form-control" type="text" id="' . $name . '" placeholder="' . $name . '" ' . $attributes . '>
             ' . $error_text;
 }
 
-
-
 function select_input($data, $options)
 {
-    $name = isset($data['name']) ? $data['name'] : "";
-    $attributes = isset($data['attributes']) ? $data['attributes'] : "";
+    $name = $data['name'] ?? "";
+    $attributes = $data['attributes'] ?? "";
 
-    // waarde
-    $selected_value = "";
-    if(isset($_SESSION['form']['value'][$name])){
-        $selected_value = $_SESSION['form']['value'][$name];
-    }
-    if(isset($data['value'])){
-        $selected_value = $data['value'];
-    }
+    $selected_value = $_SESSION['form']['value'][$name] ?? $data['value'] ?? "";
 
-    // foutmelding
-    $error_text = "";
-    if(isset($_SESSION['form']['error'][$name])){
-        $error_text = '<div class="form-text text-danger">' . $_SESSION['form']['error'][$name] . '</div>';
-    }
+    $error_text = isset($_SESSION['form']['error'][$name]) ?
+        '<div class="form-text text-danger">' . $_SESSION['form']['error'][$name] . '</div>' : "";
 
-    $label = isset($data['label']) ? $data['label'] : ucfirst($name);
+    $label = $data['label'] ?? ucfirst($name);
 
-    // opties genereren
     $options_html = "";
     foreach ($options as $key => $option_text) {
         $selected = ($key == $selected_value) ? "selected" : "";
-        $options_html .= '<option value="'.htmlspecialchars($key).'" '.$selected.'>'.htmlspecialchars($option_text).'</option>';
+        $options_html .= '<option value="' . htmlspecialchars($key) . '" ' . $selected . '>' . htmlspecialchars($option_text) . '</option>';
     }
 
-    // select tag
-    $select_tag = '<label class="form-label text-capitalize" for="'. $name .'">'. $label .'</label>
-    <select name="'.$name.'" class="form-control" id="'.$name.'" '.$attributes.'>
-        '.$options_html.'
+    return '<label class="form-label text-capitalize" for="' . $name . '">' . $label . '</label>
+    <select name="' . $name . '" class="form-control" id="' . $name . '" ' . $attributes . '>
+        ' . $options_html . '
     </select>
-    '.$error_text;
-
-    return $select_tag;
+    ' . $error_text;
 }
 
-
-
+// --- RETURN DATABASECONNECTIE --- //
+return $conn;
