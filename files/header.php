@@ -36,7 +36,7 @@
      <noscript>
       <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
     </noscript>
-    <!-- aanmeld venster-->
+    
     
     <main class="page-wrapper">
       <!-- Quick View Modal-->
