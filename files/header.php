@@ -37,75 +37,7 @@
       <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
     </noscript>
     <!-- aanmeld venster-->
-    <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header bg-secondary">
-            <ul class="nav nav-tabs card-header-tabs" role="tablist">
-              <li class="nav-item"><a class="nav-link fw-medium active" href="#signin-tab" data-bs-toggle="tab" role="tab" aria-selected="true"><i class="ci-unlocked me-2 mt-n1"></i>Inloggen</a></li>
-              <li class="nav-item"><a class="nav-link fw-medium" href="#signup-tab" data-bs-toggle="tab" role="tab" aria-selected="false"><i class="ci-user me-2 mt-n1"></i>Aanmelden</a></li>
-            </ul>
-            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body tab-content py-4">
-            <form class="needs-validation tab-pane fade show active" autocomplete="off" novalidate id="signin-tab">
-              <div class="mb-3">
-                <label class="form-label" for="si-email">Email address</label>
-                <input class="form-control" type="email" id="si-email" placeholder="johndoe@example.com" required>
-                <div class="invalid-feedback">Geef een geldig e-mailadres op.</div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="si-password">Wachtwoord</label>
-                <div class="password-toggle">
-                  <input class="form-control" type="password" id="si-password" required>
-                  <label class="password-toggle-btn" aria-label="Show/hide password">
-                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="mb-3 d-flex flex-wrap justify-content-between">
-                <div class="form-check mb-2">
-                  <input class="form-check-input" type="checkbox" id="si-remember">
-                  <label class="form-check-label" for="si-remember">Onthoud mij</label>
-                </div><a class="fs-sm" href="#">Wachtwoord vergeten?</a>
-              </div>
-              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Inloggen</button>
-            </form>
-            <form class="needs-validation tab-pane fade" autocomplete="off" novalidate id="signup-tab">
-              <div class="mb-3">
-                <label class="form-label" for="su-name">Voornaam en achternaam</label>
-                <input class="form-control" type="text" id="su-name" placeholder="John Doe" required>
-                <div class="invalid-feedback">Vul uw naam in.</div>
-              </div>
-              <div class="mb-3">
-                <label for="su-email">Email adres</label>
-                <input class="form-control" type="email" id="su-email" placeholder="johndoe@example.com" required>
-                <div class="invalid-feedback">Geef een geldig e-mailadres op.</div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="su-password">Wachtwoord</label>
-                <div class="password-toggle">
-                  <input class="form-control" type="password" id="su-password" required>
-                  <label class="password-toggle-btn" aria-label="Show/hide password">
-                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="su-password-confirm">Bevestig wachtwoord</label>
-                <div class="password-toggle">
-                  <input class="form-control" type="password" id="su-password-confirm" required>
-                  <label class="password-toggle-btn" aria-label="Show/hide password">
-                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-                  </label>
-                </div>
-              </div>
-              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Meld je aan</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <main class="page-wrapper">
       <!-- Quick View Modal-->
       <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
@@ -315,10 +247,11 @@
 
 
           <?php if (is_logged_in()){ ?>
-          <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="account-bestellingen.php">
-          <?php }else{ ?>
-          <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
-          <?php } ?>
+<a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="account-bestellingen.php">
+<?php }else{ ?>
+<a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="login.php">
+<?php } ?>
+
             <div class="navbar-tool-icon-box">
               <i class="navbar-tool-icon ci-user"></i>
             </div>

@@ -34,7 +34,7 @@ require_once('files/header.php');
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" checked id="remember_me">
                       <label class="form-check-label" for="remember_me">Ònthoud mij</label>
-                    </div><a class="nav-link-inline fs-sm" href="account-password-recovery.html">Wachtwoord vergeten??</a>
+                    </div><a class="nav-link-inline fs-sm" href="wachtwoord-vergeten.php">Wachtwoord vergeten??</a>
                   </div>
                   <hr class="mt-4">
                   <div class="text-end pt-4">
