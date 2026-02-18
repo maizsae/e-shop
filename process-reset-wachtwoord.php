@@ -1,60 +1,102 @@
 <?php
+require_once('files/header.php');
+require_once __DIR__ . "/files/functions.php";
 
-$token = $_POST["token"];
+global $conn;
+$mysqli = $conn;
 
-$token_hash = hash("sha256", $token);
+$success = false;
+$error = "";
 
-$mysqli = require __DIR__ . "/files/functions.php";
+// Token ophalen
+if (!isset($_POST["token"]) || empty($_POST["token"])) {
+    $error = "Ongeldige reset link.";
+} else {
 
-$sql = "SELECT * FROM users
-        WHERE reset_token_hash = ?";
+    $token = $_POST["token"];
+    $token_hash = hash("sha256", $token);
 
-$stmt = $mysqli->prepare($sql);
+    $sql = "SELECT * FROM users WHERE reset_token_hash = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $token_hash);
+    $stmt->execute();
 
-$stmt->bind_param("s", $token_hash);
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-$stmt->execute();
+    if ($user === null) {
+        $error = "Token niet gevonden.";
+    } elseif (strtotime($user["reset_token_expires_at"]) <= time()) {
+        $error = "Token is verlopen.";
+    } elseif (strlen($_POST["password"]) < 8) {
+        $error = "Wachtwoord moet minimaal 8 tekens zijn.";
+    } elseif (!preg_match("/[a-z]/i", $_POST["password"])) {
+        $error = "Wachtwoord moet minimaal één letter bevatten.";
+    } elseif (!preg_match("/[0-9]/", $_POST["password"])) {
+        $error = "Wachtwoord moet minimaal één cijfer bevatten.";
+    } elseif ($_POST["password"] !== $_POST["password_confirmation"]) {
+        $error = "Wachtwoorden komen niet overeen.";
+    } else {
 
-$result = $stmt->get_result();
+        $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-$user = $result->fetch_assoc();
+        $sql = "UPDATE users
+                SET password = ?,
+                    reset_token_hash = NULL,
+                    reset_token_expires_at = NULL
+                WHERE id = ?";
 
-if ($user === null) {
-    die("token not found");
+        $stmt = $mysqli->prepare($sql);
+
+        // id is integer -> si
+        $stmt->bind_param("si", $password_hash, $user["id"]);
+        $stmt->execute();
+
+        $success = true;
+    }
 }
+?>
 
-if (strtotime($user["reset_token_expires_at"]) <= time()) {
-    die("token has expired");
-}
+<div class="container py-4 py-lg-5 my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow">
+                <div class="card-body">
 
-if (strlen($_POST["password"]) < 8) {
-    die("Password must be at least 8 characters");
-}
+                    <?php if ($success): ?>
 
-if (! preg_match("/[a-z]/i", $_POST["password"])) {
-    die("Password must contain at least one letter");
-}
+                        <h2 class="h4 mb-3 text-success">Wachtwoord aangepast ✅</h2>
 
-if (! preg_match("/[0-9]/", $_POST["password"])) {
-    die("Password must contain at least one number");
-}
+                        <p class="fs-sm text-muted mb-4">
+                            Je wachtwoord is succesvol gewijzigd.
+                        </p>
 
-if ($_POST["password"] !== $_POST["password_confirmation"]) {
-    die("Passwords must match");
-}
+                        <div class="text-end">
+                            <a href="login.php" class="btn btn-primary">
+                                Naar login
+                            </a>
+                        </div>
 
-$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                    <?php else: ?>
 
-$sql = "UPDATE users
-        SET password = ?,
-            reset_token_hash = NULL,
-            reset_token_expires_at = NULL
-        WHERE id = ?";
+                        <h2 class="h4 mb-3 text-danger">Fout ❌</h2>
 
-$stmt = $mysqli->prepare($sql);
+                        <p class="fs-sm text-muted mb-4">
+                            <?= htmlspecialchars($error) ?>
+                        </p>
 
-$stmt->bind_param("ss", $password, $user["id"]);
+                        <div class="text-end">
+                            <a href="wachtwoord-vergeten.php" class="btn btn-primary">
+                                Opnieuw proberen
+                            </a>
+                        </div>
 
-$stmt->execute();
+                    <?php endif; ?>
 
-echo "Password updated. You can now login.";
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require_once('files/footer.php'); ?>

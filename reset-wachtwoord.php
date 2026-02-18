@@ -1,69 +1,75 @@
 <?php
-// Start sessie als die nog niet gestart is
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+require_once('files/header.php');
+require_once __DIR__ . "/files/functions.php"; // <-- belangrijk: require_once
 
-// Haal token uit de URL
+// gebruik de bestaande connectie uit functions.php
+global $conn;
+$mysqli = $conn;
+
 if (!isset($_GET["token"]) || empty($_GET["token"])) {
-    die("Geen token meegegeven.");
+    die("Geen token meegegeven");
 }
 
 $token = $_GET["token"];
 $token_hash = hash("sha256", $token);
 
-// Include database connectie
-$mysqli = require __DIR__ . "/files/functions.php";
-
-// Bereid de SQL statement voor
 $sql = "SELECT * FROM users WHERE reset_token_hash = ?";
 $stmt = $mysqli->prepare($sql);
-
-if (!$stmt) {
-    die("Fout bij voorbereiden van query: " . $mysqli->error);
-}
-
-// Bind en execute
 $stmt->bind_param("s", $token_hash);
 $stmt->execute();
+
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Controleer of token bestaat
 if ($user === null) {
-    die("Token niet gevonden.");
+    die("token niet gevonden");
 }
 
-// Controleer of token nog geldig is
 if (strtotime($user["reset_token_expires_at"]) <= time()) {
-    die("Token is verlopen.");
+    die("token is verlopen");
 }
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Reset Wachtwoord</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-</head>
+<div class="container py-4 py-lg-5 my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow">
+                <div class="card-body">
 
-<body>
+                    <h2 class="h4 mb-3">Wachtwoord opnieuw instellen</h2>
+                    <p class="fs-sm text-muted mb-4">
+                        Kies een nieuw wachtwoord en bevestig deze.
+                    </p>
 
-    <h1>Reset Wachtwoord</h1>
+                    <form action="process-reset-wachtwoord.php" method="post">
+                        <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
-    <form method="post" action="process-reset-wachtwoord.php">
-        <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Nieuw wachtwoord</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                        </div>
 
-        <label for="password">Nieuwe wachtwoord</label>
-        <input type="password" id="password" name="password">
+                        <div class="mb-3">
+                            <label class="form-label" for="password_confirmation">Herhaal wachtwoord</label>
+                            <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required>
+                        </div>
 
-        <label for="password_confirmation">Herhaal wachtwoord</label>
-        <input type="password" id="password_confirmation" name="password_confirmation">
+                        <div class="text-end pt-3">
+                            <button class="btn btn-primary" type="submit">
+                                Wachtwoord opslaan
+                            </button>
+                        </div>
+                    </form>
 
-        <button>Verzend</button>
-    </form>
+                    <hr class="my-4">
+                    <div class="text-center">
+                        <a href="login.php" class="fs-sm">Terug naar login</a>
+                    </div>
 
-</body>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</html>
+<?php require_once('files/footer.php'); ?>
