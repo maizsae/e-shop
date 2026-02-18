@@ -5,16 +5,16 @@
 
     <!-- User info -->
     <div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
-      
+
       <div class="d-md-flex align-items-center">
         <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width: 6.375rem;">
           <span class="badge bg-warning position-absolute end-0 mt-n2"
-                data-bs-toggle="tooltip"
-                title="Reward points">384</span>
+            data-bs-toggle="tooltip"
+            title="Reward points">384</span>
 
           <img class="rounded-circle"
-               src="img/shop/account/avatar123.jpg"
-               alt="Ena Gardner">
+            src="img/shop/account/avatar123.jpg"
+            alt="Ena Gardner">
         </div>
 
         <div class="ps-md-3">
@@ -24,9 +24,9 @@
       </div>
 
       <a class="btn btn-primary d-lg-none mb-2 mt-3 mt-md-0"
-         href="#account-menu"
-         data-bs-toggle="collapse"
-         aria-expanded="false">
+        href="#account-menu"
+        data-bs-toggle="collapse"
+        aria-expanded="false">
         <i class="ci-menu me-2"></i>Account menu
       </a>
 
@@ -39,22 +39,15 @@
         <h3 class="fs-sm mb-0 text-muted">Admin Dashboard</h3>
       </div>
 
-      <ul class="list-unstyled mb-0">
-        <li class="border-bottom mb-0">
-          <a class="nav-link-style d-flex align-items-center px-4 py-3"
-             href="admin-categorie.php">
-            <i class="ci-user opacity-60 me-2"></i>
-            Product categorie
-          </a>
-        </li>
 
-        <li class="border-bottom mb-0">
-          <a class="nav-link-style d-flex align-items-center px-4 py-3"
-             href="admin-add-categorie.php">
-            <i class="ci-user opacity-60 me-2"></i>
-            Voeg een nieuwe categorie toe
-          </a>
-        </li>
+
+      <li class="border-bottom mb-0">
+        <a class="nav-link-style d-flex align-items-center px-4 py-3"
+          href="admin-add-categorie.php">
+          <i class="ci-user opacity-60 me-2"></i>
+          Voeg een nieuwe product toe
+        </a>
+      </li>
       </ul>
 
     </div>
@@ -67,7 +60,7 @@
     <ul class="list-unstyled mb-0">
       <li class="border-bottom mb-0">
         <a class="nav-link-style d-flex align-items-center px-4 py-3"
-           href="account-bestellingen.php">
+          href="account-bestellingen.php">
           <i class="ci-user opacity-60 me-2"></i>
           Mijn bestellingen
         </a>
@@ -75,7 +68,7 @@
 
       <li class="border-top mb-0">
         <a class="nav-link-style d-flex align-items-center px-4 py-3"
-           href="logout.php">
+          href="logout.php">
           <i class="ci-sign-out opacity-60 me-2"></i>
           Log uit
         </a>

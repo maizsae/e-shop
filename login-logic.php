@@ -6,8 +6,14 @@ $password = trim($_POST['password']);
 if( login_user($email,$password) ){
 
 alert('success','Login is succesvol.');
-     header('Location: account-bestellingen.php'); 
-     die();
+    
+    // Controleer of gebruiker admin is en redirect naar admin panel
+    if (isset($_SESSION['user']['user_type']) && $_SESSION['user']['user_type'] === 'admin') {
+        header('Location: admin/index.php'); 
+    } else {
+        header('Location: account-bestellingen.php'); 
+    }
+    die();
 
 }else{
         alert('danger','Je hebt de verkeerde gebruikersnaam of wachtwoord ingevoerd');
