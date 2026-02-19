@@ -8,10 +8,19 @@ foreach ($rows as $val) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $_SESSION['form']['value'] = $_POST;
 
+  // Bouw een lijst van uploads uit je 6 inputs (photo_1 .. photo_6)
+  $files = [];
+  foreach ($_FILES as $file) {
+    // Alleen toevoegen als er echt een bestand gekozen is
+    if (isset($file['error']) && $file['error'] === 0) {
+      $files[] = $file;
+    }
+  }
 
+  // Upload en krijg array terug: [ ['src' => 'uploads/...jpg'], ... ]
+  $imgs = upload_images($files);
 
-  $imgs = upload_images($_FILES);
-  $imgs = [];
+  $data = [];
   $data['name'] = $_POST['name'];
   $data['prijs'] = $_POST['prijs'];
   $data['koopprijs'] = $_POST['koopprijs'];
@@ -19,15 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $data['user_id'] = $_SESSION['user']['id'];
 
   if (db_insert('producten', $data)) {
-    alert('success', 'Categorie is succesvol aangemaakt');
+    alert('success', 'product is succesvol aangemaakt');
     header('Location: admin-producten.php');
     unset($_SESSION['form']);
   } else {
-    alert('danger', 'Gefaald om een categorie toe te voegen, probeer het nog een keer');
+    alert('danger', 'Gefaald om een product toe te voegen, probeer het nog een keer');
     header('Location: admin-add-categorie.php');
   }
   die();
 }
+
 require_once('files/header.php'); ?> <div class="page-title-overlap bg-dark pt-4">
   <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
     <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
