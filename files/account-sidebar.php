@@ -46,7 +46,11 @@
           href="admin-add-categorie.php">
           <i class="ci-user opacity-60 me-2"></i>
           Voeg een nieuwe product toe
-        </a>
+          <a class="nav-link-style d-flex align-items-center px-4 py-3"
+            href="admin-producten.php">
+            <i class="ci-user opacity-60 me-2"></i>
+            Producten
+          </a>
       </li>
       </ul>
 

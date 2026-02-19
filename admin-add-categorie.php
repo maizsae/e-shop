@@ -1,54 +1,40 @@
-<?php
-require_once('files/functions.php');
-
+<?php require_once('files/functions.php');
 protected_area();
-
 $rows = db_select('categories', 'parent_id = 0');
 $categories = [];
-
 foreach ($rows as $val) {
   $categories[$val['id']] = $val['name'];
 }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $_SESSION['form']['value'] = $_POST;
-  $data['user_id'] = $_SESSION['user']['id'];
 
 
 
   $imgs = upload_images($_FILES);
   $imgs = [];
   $data['name'] = $_POST['name'];
-  $data['prijs'] = $_POST['prijs'] ?? '';
+  $data['prijs'] = $_POST['prijs'];
   $data['koopprijs'] = $_POST['koopprijs'];
+  $data['photo'] = json_encode($imgs);
   $data['user_id'] = $_SESSION['user']['id'];
 
-
-  $data['photo'] = json_encode($imgs);
-
-
-
-
   if (db_insert('producten', $data)) {
-    alert('success', 'Product is succesvol aangemaakt');
+    alert('success', 'Categorie is succesvol aangemaakt');
     header('Location: admin-producten.php');
     unset($_SESSION['form']);
   } else {
-    alert('danger', 'Gefaald om een product toe te voegen, probeer het nog een keer');
-    header('Location: admin-producten.php');
+    alert('danger', 'Gefaald om een categorie toe te voegen, probeer het nog een keer');
+    header('Location: admin-add-categorie.php');
   }
   die();
 }
-require_once('files/header.php');
-?>
-<div class="page-title-overlap bg-dark pt-4">
+require_once('files/header.php'); ?> <div class="page-title-overlap bg-dark pt-4">
   <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
     <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
           <li class="breadcrumb-item"><a class="text-nowrap" href="index-2.html"><i class="ci-home"></i>Home</a></li>
-          <li class="breadcrumb-item text-nowrap"><a href="#">Account</a>
-          </li>
+          <li class="breadcrumb-item text-nowrap"><a href="#">Account</a> </li>
           <li class="breadcrumb-item text-nowrap active" aria-current="page">Bestelgeschiedenis</li>
         </ol>
       </nav>
@@ -59,55 +45,53 @@ require_once('files/header.php');
   </div>
 </div>
 <div class="container pb-5 mb-2 mb-md-4">
-  <div class="row">
-    <?php require_once('files/account-sidebar.php') ?>
-    <!-- Content  -->
+  <div class="row"> <?php require_once('files/account-sidebar.php') ?> <!-- Content -->
     <section class="col-lg-8 pt-lg-4 pb-4 mb-3">
-      <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
-        <!-- Title-->
-        <div class="d-sm-flex flex-wrap justify-content-between align-items-center border-bottom">
-          <h2 class="h3 py-2 me-2 text-center text-sm-start">Your products<span class="badge bg-faded-accent fs-sm text-body align-middle ms-2">5</span></h2>
-          <div class="py-2">
-            <div class="d-flex flex-nowrap align-items-center pb-3">
-              <label class="form-label fw-normal text-nowrap mb-0 me-2" for="sorting">Sort by:</label>
-              <select class="form-select form-select-sm me-2" id="sorting">
-                <option>Date Created</option>
-                <option>Product Name</option>
-                <option>Price</option>
-                <option>Your Rating</option>
-                <option>Updates</option>
-              </select>
-              <button class="btn btn-outline-secondary btn-sm px-2" type="button"><i class="ci-arrow-up"></i></button>
-            </div>
-          </div>
+      <div class="pt-2 px-4 ps-lg-0 pe-xl-5"> <!-- Title-->
+        <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
+          <h2 class="h3 py-2 me-2 text-center text-sm-start">Voeg een nieuwe product toe</h2>
+          <div class="py-2"> <select class="form-select me-2" id="unp-category">
+              <option>Selecteer een categorie</option>
+              <option>Photos</option>
+              <option>Graphics</option>
+              <option>UI Design</option>
+              <option>Web Themes</option>
+              <option>Fonts</option>
+              <option>Add-Ons</option>
+            </select> </div>
         </div>
-        <?php
-        foreach ($categories as $key => $value) {
-
-
-        ?>
-          <!-- Product-->
-          <div class="d-block d-sm-flex align-items-center py-4 border-bottom"><a class="d-block mb-3 mb-sm-0 me-sm-4 ms-sm-0 mx-auto" href="marketplace-single.html" style="width: 12.5rem;"><img class="rounded-3" src="img/marketplace/products/th08.jpg" alt="Product"></a>
-            <div class="text-center text-sm-start">
-              <h3 class="h6 product-title mb-2"><a href="marketplace-single.html">Flat-line E-Commerce Icons (AI)</a></h3>
-              <div class="d-inline-block text-accent">$18.<small>00</small></div>
-              <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Sales: <span class="fw-medium">26</span></div>
-              <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Earnings: <span class="fw-medium">$327.<small>60</small></span></div>
-              <div class="d-flex justify-content-center justify-content-sm-start pt-3">
-                <button class="btn bg-faded-accent btn-icon me-2" type="button" data-bs-toggle="tooltip" title="Download"><i class="ci-download text-accent"></i></button>
-                <button class="btn bg-faded-info btn-icon me-2" type="button" data-bs-toggle="tooltip" title="Edit"><i class="ci-edit text-info"></i></button>
-                <button class="btn bg-faded-danger btn-icon" type="button" data-bs-toggle="tooltip" title="Delete"><i class="ci-trash text-danger"></i></button>
+        <form action="admin-add-categorie.php" method="POST" enctype="multipart/form-data">
+          <div class="mb-3 pb-2">
+            <div class="row mt-4">
+              <div class="col-md-12"> <?= text_input(['name' => 'name',]) ?> </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-6"> <?= text_input(['name' => 'koopprijs', 'label' => 'koopprijs',]) ?> </div>
+              <div class="col-md-6"> <label class="form-label">verkoop prijs</label> <input class="form-control" type="text" name="prijs"> </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-6 mt-3">
+                <div class="form-group"> <label for="photo">Product foto 1</label> <input class="form-control" name="photo_1" type="file" accept=".jpg,.jpeg,.png"> </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group"> <label for="photo">Product foto 2 </label> <input class="form-control" name="photo_2" type="file" accept=".jpg,.jpeg,.png"> </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group"> <label for="photo">Product foto 3 </label> <input class="form-control" name="photo_3" type="file" accept=".jpg,.jpeg,.png"> </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group"> <label for="photo">Product foto 4 </label> <input class="form-control" name="photo_4" type="file" accept=".jpg,.jpeg,.png"> </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group"> <label for="photo">Product foto 5 </label> <input class="form-control" name="photo_5" type="file" accept=".jpg,.jpeg,.png"> </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group"> <label for="photo">Product foto 6 </label> <input class="form-control" name="photo_6" type="file" accept=".jpg,.jpeg,.png"> </div>
               </div>
             </div>
-          </div>
-        <?php  } ?>
+          </div> <button class="btn btn-primary d-block w-100" type="submit"><i class="ci-cloud-upload fs-lg me-2"></i>Upload Product</button>
+        </form>
       </div>
     </section>
   </div>
-</div>
-
-
-<?php
-
-require_once('files/footer.php');
-?>
+</div> <?php require_once('files/footer.php'); ?>
