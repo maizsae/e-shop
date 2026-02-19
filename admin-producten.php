@@ -4,10 +4,7 @@ require_once('files/functions.php');
 protected_area();
 
 $producten = db_select('producten', '1 ORDER BY id DESC ');
-echo "<pre>";
-$p = $producten[0];
-print_r($p['photo']);
-die();
+
 
 require_once('files/header.php');
 ?>
@@ -91,7 +88,7 @@ require_once('files/header.php');
               style="width: 12.5rem;">
 
               <img class="rounded-3"
-                src="<?= $photo ?>"
+                src="<?= get_product_image($pro['photo']); ?>"
                 alt="<?= htmlspecialchars($pro['name']) ?>"
                 style="width:100%; height:auto;">
 

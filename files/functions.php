@@ -14,7 +14,27 @@ if ($conn->connect_errno) {
     die("Fout bij verbinden met database: " . $conn->connect_error);
 }
 
+function get_product_image($json)
+{
+    $img = "uploads/default.jpg";
+    if ($json == null) {
+        return $img;
+    }
+    if (strlen($img) < 4) {
+        return $img;
+    }
+    $objects = json_decode($json);
+    if (empty($objects)) {
+        return $img;
+    }
+    if (!isset($objects[0]->src)) {
+        return $img;
+    }
 
+    return $objects[0]->src;
+    echo "<pre>";
+    print_r($objects[0]);
+}
 
 
 
