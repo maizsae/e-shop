@@ -1,6 +1,5 @@
 <?php
-echo "PHP DRAAIT";
-die();
+
 require_once('files/functions.php');
 admin_protected_area();
 

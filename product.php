@@ -65,49 +65,32 @@ $images = get_product_photos($pro['photo']);
                             </a>
                             <button class="btn-wishlist me-0 me-lg-n3" type="button" data-bs-toggle="tooltip" title="Add to wishlist"><i class="ci-heart"></i></button>
                         </div>
-                        <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$18.<small>99</small></span>
-                            <del class="text-muted fs-lg me-3">$25.<small>00</small></del><span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
+                        <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$<?= $pro['prijs'] ?>
+
+
+
+                                <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Product in voorraad</div>
                         </div>
-                        <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span class="text-muted" id="colorOption">Red/Dark blue/White</span></div>
-                        <div class="position-relative me-n4 mb-3">
-                            <div class="form-check form-option form-check-inline mb-2">
-                                <input class="form-check-input" type="radio" name="color" id="color1" data-bs-label="colorOption" value="Red/Dark blue/White" checked>
-                                <label class="form-option-label rounded-circle" for="color1"><span class="form-option-color rounded-circle" style="background-image: url(img/shop/single/color-opt-1.png)"></span></label>
-                            </div>
-                            <div class="form-check form-option form-check-inline mb-2">
-                                <input class="form-check-input" type="radio" name="color" id="color2" data-bs-label="colorOption" value="Beige/White/Dark grey">
-                                <label class="form-option-label rounded-circle" for="color2"><span class="form-option-color rounded-circle" style="background-image: url(img/shop/single/color-opt-2.png)"></span></label>
-                            </div>
-                            <div class="form-check form-option form-check-inline mb-2">
-                                <input class="form-check-input" type="radio" name="color" id="color3" data-bs-label="colorOption" value="Dark grey/White/Orange">
-                                <label class="form-option-label rounded-circle" for="color3"><span class="form-option-color rounded-circle" style="background-image: url(img/shop/single/color-opt-3.png)"></span></label>
-                            </div>
-                            <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Product available</div>
-                        </div>
-                        <form class="mb-grid-gutter" method="post">
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between align-items-center pb-1">
-                                    <label class="form-label" for="product-size">Size:</label><a class="nav-link-style fs-sm" href="#size-chart" data-bs-toggle="modal"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Size guide</a>
-                                </div>
-                                <select class="form-select" required id="product-size">
-                                    <option value="">Select size</option>
-                                    <option value="xs">XS</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
-                                </select>
-                            </div>
+                        <form class="mb-grid-gutter" method="GET" action="cart-add.php">
+
+                            <input type="hidden" name="id" value="<?= (int)$pro['id'] ?>">
+
                             <div class="mb-3 d-flex align-items-center">
-                                <select class="form-select me-3" style="width: 5rem;">
+
+                                <select class="form-select me-3" style="width: 5rem;" name="qty">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <button class="btn btn-primary btn-shadow d-block w-100" type="submit"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+
+                                <button class="btn btn-primary btn-shadow d-block w-100" type="submit">
+                                    <i class="ci-cart fs-lg me-2"></i>Voeg toe aan winkelmand
+                                </button>
+
                             </div>
+
                         </form>
                         <!-- Product panels-->
                         <div class="accordion mb-4" id="productPanels">
@@ -115,11 +98,11 @@ $images = get_product_photos($pro['photo']);
                                 <h3 class="accordion-header"><a class="accordion-button" href="#productInfo" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="productInfo"><i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info</a></h3>
                                 <div class="accordion-collapse collapse show" id="productInfo" data-bs-parent="#productPanels">
                                     <div class="accordion-body">
-                                        <h6 class="fs-sm mb-2">Composition</h6>
+                                        <h6 class="fs-sm mb-2">Lorem ipsum</h6>
                                         <ul class="fs-sm ps-4">
-                                            <li>Elastic rib: Cotton 95%, Elastane 5%</li>
-                                            <li>Lining: Cotton 100%</li>
-                                            <li>Cotton 80%, Polyester 20%</li>
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Qui porro facere ea aliquam obcaecati</li>
+                                            <li>Ut omnis sint est maiores molestias</li>
                                         </ul>
                                         <h6 class="fs-sm mb-2">Art. No.</h6>
                                         <ul class="fs-sm ps-4 mb-0">
@@ -129,40 +112,40 @@ $images = get_product_photos($pro['photo']);
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Shipping options</a></h3>
+                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shippingOptions" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Verzend opties</a></h3>
                                 <div class="accordion-collapse collapse" id="shippingOptions" data-bs-parent="#productPanels">
                                     <div class="accordion-body fs-sm">
                                         <div class="d-flex justify-content-between border-bottom pb-2">
                                             <div>
                                                 <div class="fw-semibold text-dark">Courier</div>
-                                                <div class="fs-sm text-muted">2 - 4 days</div>
+                                                <div class="fs-sm text-muted">2 - 4 dagen</div>
                                             </div>
-                                            <div>$26.50</div>
+                                            <div>€26,50</div>
                                         </div>
                                         <div class="d-flex justify-content-between border-bottom py-2">
                                             <div>
-                                                <div class="fw-semibold text-dark">Local shipping</div>
-                                                <div class="fs-sm text-muted">up to one week</div>
+                                                <div class="fw-semibold text-dark">Lokale shipping</div>
+                                                <div class="fs-sm text-muted">1 week</div>
                                             </div>
-                                            <div>$10.00</div>
+                                            <div>€10,00</div>
                                         </div>
                                         <div class="d-flex justify-content-between border-bottom py-2">
                                             <div>
                                                 <div class="fw-semibold text-dark">Flat rate</div>
-                                                <div class="fs-sm text-muted">5 - 7 days</div>
+                                                <div class="fs-sm text-muted">5 - 7 dagen</div>
                                             </div>
-                                            <div>$33.85</div>
+                                            <div>€33,85</div>
                                         </div>
                                         <div class="d-flex justify-content-between border-bottom py-2">
                                             <div>
-                                                <div class="fw-semibold text-dark">UPS ground shipping</div>
-                                                <div class="fs-sm text-muted">4 - 6 days</div>
+                                                <div class="fw-semibold text-dark">UPS grond shipping</div>
+                                                <div class="fs-sm text-muted">4 - 6 dagen</div>
                                             </div>
-                                            <div>$18.00</div>
+                                            <div>€18,00</div>
                                         </div>
                                         <div class="d-flex justify-content-between pt-2">
                                             <div>
-                                                <div class="fw-semibold text-dark">Local pickup from store</div>
+                                                <div class="fw-semibold text-dark">Haal het op</div>
                                                 <div class="fs-sm text-muted">&mdash;</div>
                                             </div>
                                             <div>$0.00</div>
@@ -171,19 +154,10 @@ $images = get_product_photos($pro['photo']);
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Find in local store</a></h3>
+                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="localStore"><i class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Vind bij een winkel in je buurt</a></h3>
                                 <div class="accordion-collapse collapse" id="localStore" data-bs-parent="#productPanels">
                                     <div class="accordion-body">
-                                        <select class="form-select">
-                                            <option value>Select your country</option>
-                                            <option value="Argentina">Argentina</option>
-                                            <option value="Belgium">Belgium</option>
-                                            <option value="France">France</option>
-                                            <option value="Germany">Germany</option>
-                                            <option value="Spain">Spain</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="USA">USA</option>
-                                        </select>
+
                                     </div>
                                 </div>
                             </div>
