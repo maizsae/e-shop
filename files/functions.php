@@ -8,11 +8,57 @@ define('BASE_URL', 'http://localhost/e-shop');
 
 // Maak databaseverbinding
 $conn = new mysqli('localhost', 'root', '', 'e-shop');
+function get_product($id)
+{
+    $sql = "SELECT * FROM producten WHERE producten.id = $id";
+    global $conn;
+    $result = $conn->query($sql);
+    return $result->fetch_assoc();
+}
 
 // Controleer connectie
 if ($conn->connect_errno) {
     die("Fout bij verbinden met database: " . $conn->connect_error);
 }
+
+function fake_product()
+{
+    die("generating");
+}
+
+function get_product_photos($json)
+{
+    $img['src'] = "uploads/default.jpg";
+    $photo[] = $img;
+
+    if ($json == null) {
+        return $photo;
+    }
+    if (strlen($json) < 4) {
+        return $photo;
+    }
+    $objects = json_decode($json);
+
+    if (empty($objects)) {
+        return $photo;
+    }
+
+
+    return $objects;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function get_product_image($json)
 {
@@ -296,3 +342,80 @@ function select_input($data, $options)
 
 
 return $conn;
+
+
+
+function product_item_ui_1($pro)
+{
+
+    $image = get_product_image($pro['photo']);
+    $str = <<<EOF
+<div class="col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Voeg toe aan verlanglijst">
+                                <i class="ci-heart"></i>
+                            </button>
+
+                            <a class="card-img-top d-block overflow-hidden" href="product.php?id= {$pro['id']}">
+                                <img src="{$image}" alt="Product">
+                            </a>
+
+                            <div class="card-body py-2">
+                                <a class="product-meta d-block fs-xs pb-1"></a>
+                                <h3 class="product-title fs-sm">
+                                    <a href="product.php?id={$pro['id']}">{$pro['name']}</a>
+                                </h3>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price">
+                                        <span class="text-accent">€{$pro['prijs']}.<small>00</small></span>
+                                    </div>
+
+                                    <div class="star-rating">
+                                        <i class="star-rating-icon ci-star-filled active"></i>
+                                        <i class="star-rating-icon ci-star-filled active"></i>
+                                        <i class="star-rating-icon ci-star-filled active"></i>
+                                        <i class="star-rating-icon ci-star-filled active"></i>
+                                        <i class="star-rating-icon ci-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body card-body-hidden">
+                                <div class="text-center pb-2">
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size=" id="s-75">
+                                        <label class="form-option-label" for="s-75">7.5</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size=" id="s-80" checked>
+                                        <label class="form-option-label" for="s-80">8</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size=" id="s-85">
+                                        <label class="form-option-label" for="s-85">8.5</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size=" id="s-90?>">
+                                        <label class="form-option-label" for="s-90">9</label>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
+                                    <i class="ci-cart fs-sm me-1"></i>Voeg toe aan de winkelmand
+                                </button>
+
+                                <div class="text-center">
+                                    <a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal">
+                                        <i class="ci-eye align-middle me-1"></i>Quick view
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="d-sm-none">
+                    </div>
+
+EOF;
+    return $str;
+}

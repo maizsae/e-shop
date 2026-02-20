@@ -1,5 +1,6 @@
 <?php
 require_once('files/header.php');
+
 $producten = db_select('producten', '1 ORDER BY id DESC ');
 ?>
 
@@ -39,75 +40,11 @@ $producten = db_select('producten', '1 ORDER BY id DESC ');
 
             </div>
 
-            <!-- Products grid-->
+
             <div class="row mx-n2">
-                <?php foreach ($producten as $key => $pro) { ?>
-                    <div class="col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Voeg toe aan verlanglijst">
-                                <i class="ci-heart"></i>
-                            </button>
-
-                            <a class="card-img-top d-block overflow-hidden" href="product.php?id=<?= $pro['id'] ?>">
-                                <img src="<?= get_product_image($pro['photo']) ?>" alt="Product">
-                            </a>
-
-                            <div class="card-body py-2">
-                                <a class="product-meta d-block fs-xs pb-1"></a>
-                                <h3 class="product-title fs-sm">
-                                    <a href="product.php?id=<?= $pro['id'] ?>"><?= $pro['name'] ?></a>
-                                </h3>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price">
-                                        <span class="text-accent">$<?= $pro['prijs'] ?>.<small>00</small></span>
-                                    </div>
-
-                                    <div class="star-rating">
-                                        <i class="star-rating-icon ci-star-filled active"></i>
-                                        <i class="star-rating-icon ci-star-filled active"></i>
-                                        <i class="star-rating-icon ci-star-filled active"></i>
-                                        <i class="star-rating-icon ci-star-filled active"></i>
-                                        <i class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size<?= $key ?>" id="s-75-<?= $key ?>">
-                                        <label class="form-option-label" for="s-75-<?= $key ?>">7.5</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size<?= $key ?>" id="s-80-<?= $key ?>" checked>
-                                        <label class="form-option-label" for="s-80-<?= $key ?>">8</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size<?= $key ?>" id="s-85-<?= $key ?>">
-                                        <label class="form-option-label" for="s-85-<?= $key ?>">8.5</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size<?= $key ?>" id="s-90-<?= $key ?>">
-                                        <label class="form-option-label" for="s-90-<?= $key ?>">9</label>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
-                                    <i class="ci-cart fs-sm me-1"></i>Voeg toe aan de winkelmand
-                                </button>
-
-                                <div class="text-center">
-                                    <a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal">
-                                        <i class="ci-eye align-middle me-1"></i>Quick view
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="d-sm-none">
-                    </div>
-                <?php } ?>
+                <?php foreach ($producten as $key => $pro) {
+                    echo product_item_ui_1($pro);
+                } ?>
             </div>
 
             <!-- Banner-->
