@@ -8,6 +8,8 @@ define('BASE_URL', 'http://localhost/e-shop');
 
 // Maak databaseverbinding
 $conn = new mysqli('localhost', 'root', '', 'e-shop');
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+$conn->set_charset("utf8mb4");
 function get_product($id)
 {
     $sql = "SELECT * FROM producten WHERE producten.id = $id";
@@ -440,4 +442,126 @@ function product_item_ui_1($pro)
 
 EOF;
     return $str;
+}
+
+
+function cart_get_or_create_id($user_id)
+{
+    // 1) bestaat er al een open cart?
+    $cart = db_one("SELECT id FROM carts WHERE user_id = ? AND status = 'open' LIMIT 1", "i", [$user_id]);
+    if ($cart) return (int)$cart['id'];
+
+    // 2) anders: maak aan
+    $res = db_exec("INSERT INTO carts (user_id, status) VALUES (?, 'open')", "i", [$user_id]);
+    return (int)$res['insert_id'];
+}
+
+function cart_add_db($user_id, $product_id, $qty)
+{
+    $qty = max(1, (int)$qty);
+    $product_id = (int)$product_id;
+
+    // product ophalen
+    $pro = db_one("SELECT id, name, prijs, photo FROM producten WHERE id = ? LIMIT 1", "i", [$product_id]);
+    if (!$pro) return ['ok' => false, 'error' => 'Product bestaat niet'];
+
+    $cart_id = cart_get_or_create_id((int)$user_id);
+
+    // bestaat item al?
+    $item = db_one("SELECT id, qty FROM cart_items WHERE cart_id = ? AND product_id = ? LIMIT 1", "ii", [$cart_id, $product_id]);
+
+    if ($item) {
+        db_exec(
+            "UPDATE cart_items SET qty = qty + ? WHERE cart_id = ? AND product_id = ?",
+            "iii",
+            [$qty, $cart_id, $product_id]
+        );
+    } else {
+        db_exec(
+            "INSERT INTO cart_items (cart_id, product_id, qty, unit_price) VALUES (?, ?, ?, ?)",
+            "iiid",
+            [$cart_id, $product_id, $qty, (float)$pro['prijs']]
+        );
+    }
+
+    return ['ok' => true];
+}
+
+function cart_remove_db($user_id, $product_id)
+{
+    $cart = db_one("SELECT id FROM carts WHERE user_id = ? AND status = 'open' LIMIT 1", "i", [(int)$user_id]);
+    if (!$cart) return ['ok' => true];
+
+    db_exec("DELETE FROM cart_items WHERE cart_id = ? AND product_id = ?", "ii", [(int)$cart['id'], (int)$product_id]);
+    return ['ok' => true];
+}
+
+function cart_update_qty_db($user_id, $product_id, $qty)
+{
+    $qty = (int)$qty;
+    $cart = db_one("SELECT id FROM carts WHERE user_id = ? AND status = 'open' LIMIT 1", "i", [(int)$user_id]);
+    if (!$cart) return ['ok' => false, 'error' => 'Geen winkelmand gevonden'];
+
+    if ($qty <= 0) {
+        db_exec("DELETE FROM cart_items WHERE cart_id = ? AND product_id = ?", "ii", [(int)$cart['id'], (int)$product_id]);
+        return ['ok' => true];
+    }
+
+    db_exec("UPDATE cart_items SET qty = ? WHERE cart_id = ? AND product_id = ?", "iii", [$qty, (int)$cart['id'], (int)$product_id]);
+    return ['ok' => true];
+}
+
+function cart_items_db($user_id)
+{
+    $cart = db_one("SELECT id FROM carts WHERE user_id = ? AND status = 'open' LIMIT 1", "i", [(int)$user_id]);
+    if (!$cart) return [];
+
+    // join voor product info (naam, foto) + prijs snapshot (unit_price)
+    return db_all(
+        "SELECT ci.product_id AS id, ci.qty, ci.unit_price AS prijs, p.name, p.photo
+         FROM cart_items ci
+         JOIN producten p ON p.id = ci.product_id
+         WHERE ci.cart_id = ?
+         ORDER BY ci.id DESC",
+        "i",
+        [(int)$cart['id']]
+    );
+}
+function db_one($sql, $types = "", $params = [])
+{
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    if ($types && $params) $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $row = $res ? $res->fetch_assoc() : null;
+    $stmt->close();
+    return $row;
+}
+
+function db_all($sql, $types = "", $params = [])
+{
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    if ($types && $params) $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $rows = [];
+    if ($res) {
+        while ($r = $res->fetch_assoc()) $rows[] = $r;
+    }
+    $stmt->close();
+    return $rows;
+}
+
+function db_exec($sql, $types = "", $params = [])
+{
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    if ($types && $params) $stmt->bind_param($types, ...$params);
+    $ok = $stmt->execute();
+    $insertId = $stmt->insert_id;
+    $affected = $stmt->affected_rows;
+    $stmt->close();
+    return ['ok' => $ok, 'insert_id' => $insertId, 'affected' => $affected];
 }
