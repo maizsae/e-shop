@@ -23,6 +23,10 @@ if ($conn->connect_errno) {
 
 function fake_product()
 {
+
+    for ($i=0; $i < 20; $i++) { 
+        $pro['name'] =  ;
+    }
     die("generating");
 }
 

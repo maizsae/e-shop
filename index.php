@@ -1,6 +1,14 @@
 <?php
 
 require_once('files/header.php');
+fake_product();
+die("done");
+
+
+
+
+
+
 ?>
 <!-- Hero slider-->
 <!-- Hero slider-->
