@@ -32,29 +32,7 @@
 
     </div>
 
-    <!-- Admin menu -->
-    <div class="d-lg-block collapse" id="account-menu">
 
-      <div class="bg-secondary px-4 py-3">
-        <h3 class="fs-sm mb-0 text-muted">Admin Dashboard</h3>
-      </div>
-
-
-
-      <li class="border-bottom mb-0">
-        <a class="nav-link-style d-flex align-items-center px-4 py-3"
-          href="admin-add-categorie.php">
-          <i class="ci-user opacity-60 me-2"></i>
-          Voeg een nieuwe product toe
-          <a class="nav-link-style d-flex align-items-center px-4 py-3"
-            href="admin-producten.php">
-            <i class="ci-user opacity-60 me-2"></i>
-            Producten
-          </a>
-      </li>
-      </ul>
-
-    </div>
 
     <!-- Account section -->
     <div class="bg-secondary px-4 py-3">

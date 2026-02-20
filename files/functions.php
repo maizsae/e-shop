@@ -21,14 +21,7 @@ if ($conn->connect_errno) {
     die("Fout bij verbinden met database: " . $conn->connect_error);
 }
 
-function fake_product()
-{
 
-    for ($i=0; $i < 20; $i++) { 
-        $pro['name'] =  ;
-    }
-    die("generating");
-}
 
 function get_product_photos($json)
 {
@@ -153,6 +146,31 @@ function db_select($table_name, $where = null)
     }
 
     return $rows;
+}
+function db_update($table_name, $data, $where)
+{
+    global $conn;
+
+    $set = [];
+    foreach ($data as $key => $value) {
+        if (is_string($value)) {
+            $set[] = "$key='" . $conn->real_escape_string($value) . "'";
+        } else if ($value === null) {
+            $set[] = "$key=NULL";
+        } else {
+            $set[] = "$key=$value";
+        }
+    }
+
+    $sql = "UPDATE $table_name SET " . implode(',', $set) . " WHERE $where";
+    return $conn->query($sql) ? true : false;
+}
+
+function db_delete($table_name, $where)
+{
+    global $conn;
+    $sql = "DELETE FROM $table_name WHERE $where";
+    return $conn->query($sql) ? true : false;
 }
 
 

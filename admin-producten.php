@@ -1,7 +1,7 @@
 <?php
 require_once('files/functions.php');
 
-protected_area();
+admin_protected_area();
 
 $producten = db_select('producten', '1 ORDER BY id DESC ');
 
@@ -44,7 +44,7 @@ require_once('files/header.php');
 <div class="container pb-5 mb-2 mb-md-4">
   <div class="row">
 
-    <?php require_once('files/account-sidebar.php') ?>
+    <?php require_once('files/admin-sidebar.php') ?>
 
 
     <!-- Content -->
@@ -110,18 +110,18 @@ require_once('files/header.php');
 
               <div class="d-flex justify-content-center justify-content-sm-start pt-3">
 
-                <button class="btn bg-faded-info btn-icon me-2"
-                  type="button"
+                <a class="btn bg-faded-info btn-icon me-2"
+                  href="admin-product-edit.php?id=<?= (int)$pro['id'] ?>"
                   title="Edit">
                   <i class="ci-edit text-info"></i>
-                </button>
+                </a>
 
-
-                <button class="btn bg-faded-danger btn-icon"
-                  type="button"
-                  title="Delete">
+                <a class="btn bg-faded-danger btn-icon"
+                  href="admin-product-delete.php?id=<?= (int)$pro['id'] ?>"
+                  title="Delete"
+                  onclick="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
                   <i class="ci-trash text-danger"></i>
-                </button>
+                </a>
 
               </div>
 

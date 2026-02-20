@@ -1,5 +1,5 @@
 <?php require_once('files/functions.php');
-protected_area();
+admin_protected_area();
 $rows = db_select('categories', 'parent_id = 0');
 $categories = [];
 foreach ($rows as $val) {
@@ -55,7 +55,7 @@ require_once('files/header.php'); ?> <div class="page-title-overlap bg-dark pt-4
   </div>
 </div>
 <div class="container pb-5 mb-2 mb-md-4">
-  <div class="row"> <?php require_once('files/account-sidebar.php') ?> <!-- Content -->
+  <div class="row"> <?php require_once('files/admin-sidebar.php') ?> <!-- Content -->
     <section class="col-lg-8 pt-lg-4 pb-4 mb-3">
       <div class="pt-2 px-4 ps-lg-0 pe-xl-5"> <!-- Title-->
         <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
